@@ -6,6 +6,6 @@ const postSchema = new Schema({
   post: String,
 });
 
-export default model("BlogPost", postSchema);
+export default model("BlogPost", postSchema, "posts");
 
 // db.posts.insert({name: "Robert Scibelli", date: "January 21st 2024", post: "Hello world"})

@@ -1,5 +1,6 @@
 import express from "express";
 import BlogPost from "./models/BlogPost";
+import { connect } from "mongoose";
 const app = express();
 const PORT = 2081;
 
@@ -13,7 +14,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-import { connect } from "mongoose";
 connect("mongodb://localhost:27017/brain-dump-db", {
   useNewUrlParser: true,
   useUnifiedTopology: true,

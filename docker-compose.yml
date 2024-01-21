@@ -21,7 +21,7 @@ services:
       - react-app
 
   mongo:
-    image: mongo:latest
+    image: webhippie/mongodb:latest-arm32v7
     volumes:
       - /mnt/usb:/data/db
     ports:

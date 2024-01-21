@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { getPosts, createPost } from '../functions/dbCalls';
 
 const Dump = () => {
   const [newPost, setNewPost] = useState('');
   const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    let allposts = getPosts()
+    console.log("posts " + allposts)
+    setPosts(allposts)
+  }, []);
 
   const handlePostChange = (e) => {
     setNewPost(e.target.value);
@@ -11,6 +18,7 @@ const Dump = () => {
   const handlePostSubmit = () => {
     if (newPost.trim() !== '') {
       setPosts([...posts, newPost]);
+      // createPost(newPost)
       setNewPost('');
     }
   };

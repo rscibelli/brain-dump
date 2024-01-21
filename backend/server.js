@@ -1,5 +1,5 @@
 import express from "express";
-import Post, { find } from "./models/Post";
+import Post from "./models/Post";
 const app = express();
 const PORT = 2081;
 
@@ -21,7 +21,7 @@ connect("mongodb://localhost:27017/brain-dump-db", {
 
 app.get("/api/posts", async (req, res) => {
     try {
-        const posts = await find();
+        const posts = await Post.find();
         res.json(posts);
     } catch (error) {
         console.error(error);

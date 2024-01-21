@@ -1,11 +1,11 @@
-const mongoose = require("mongoose");
+import { Schema, model } from "mongoose";
 
-const postSchema = new mongoose.Schema({
+const postSchema = new Schema({
   name: String,
   date: String,
   post: String,
 });
 
-module.exports = mongoose.model("Post", postSchema);
+export default model("Post", postSchema);
 
 // db.posts.insert({name: "Robert Scibelli", date: "January 21st 2024", post: "Hello world"})

@@ -1,5 +1,5 @@
-const express = require("express");
-const Post = require("./models/Post");
+import express from "express";
+import Post, { find } from "./models/Post";
 const app = express();
 const PORT = 2081;
 
@@ -13,15 +13,15 @@ app.use(function(req, res, next) {
   next();
 });
 
-const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost:27017/brain-dump-db", {
+import { connect } from "mongoose";
+connect("mongodb://localhost:27017/brain-dump-db", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
 app.get("/api/posts", async (req, res) => {
     try {
-        const posts = await Post.find();
+        const posts = await find();
         res.json(posts);
     } catch (error) {
         console.error(error);

@@ -5,6 +5,14 @@ const PORT = 2081;
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
+app.use(function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  next();
+});
+
 const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:27017/brain-dump-db", {
   useNewUrlParser: true,

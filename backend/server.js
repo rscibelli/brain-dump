@@ -1,5 +1,5 @@
 import express from "express";
-import BlogPost from "./models/BlogPost";
+import BlogPost from "../models/BlogPost.js";
 import { connect } from "mongoose";
 const app = express();
 const PORT = 2081;

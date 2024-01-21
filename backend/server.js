@@ -1,5 +1,5 @@
 import express from "express";
-import Post from "/app/models/Post";
+import Post from "./models/Post.js";
 const app = express();
 const PORT = 2081;
 

@@ -18,9 +18,9 @@ services:
 
   backend:
     image: node:14
-    working_dir: /
+    working_dir: /app
     volumes:
-      - ./backend:/
+      - ./backend:/app
     ports:
       - "2081:2081"
     command: node server.js

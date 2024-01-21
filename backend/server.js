@@ -1,5 +1,5 @@
 import express from "express";
-import Post from "./models/Post.js";
+import BlogPost from "./models/BlogPost";
 const app = express();
 const PORT = 2081;
 
@@ -21,7 +21,7 @@ connect("mongodb://localhost:27017/brain-dump-db", {
 
 app.get("/api/posts", async (req, res) => {
     try {
-        const posts = await Post.find();
+        const posts = await BlogPost.find();
         res.json(posts);
     } catch (error) {
         console.error(error);
@@ -32,7 +32,7 @@ app.get("/api/posts", async (req, res) => {
 app.post('/api/post', async (req, res) => {
     try {
       const newPostData = req.body;
-      const newPost = new Post(newPostData);
+      const newPost = new BlogPost(newPostData);
   
       await newPost.save();
   

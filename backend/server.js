@@ -1,12 +1,12 @@
 const express = require("express");
 const Post = require("./models/Post");
 const app = express();
-const PORT = 3000;
+const PORT = 2081;
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/brain-dump-db", {
+mongoose.connect("mongodb://localhost:27017/brain-dump-db", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

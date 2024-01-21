@@ -18,7 +18,7 @@ const Dump = () => {
   const handlePostSubmit = () => {
     if (newPost.trim() !== '') {
       setPosts([...posts, newPost]);
-      // createPost(newPost)
+      createPost(newPost)
       setNewPost('');
     }
   };

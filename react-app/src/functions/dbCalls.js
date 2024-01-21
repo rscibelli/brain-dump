@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-// const API_URL = 'http://10.0.0.251:2080';
-const API_URL = 'http://localhost:3000';
+const API_URL = 'http://10.0.0.251:2081';
 
 // Example function to fetch data from the server
 export const getPosts = async () => {

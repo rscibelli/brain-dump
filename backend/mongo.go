@@ -13,6 +13,7 @@ import (
 )
 
 func GetPosts(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("start of GET")
 	collection, err := makeCollection()
 	if err != nil {
 		json.NewEncoder(w).Encode("error creating collection: " + err.Error())

@@ -18,7 +18,12 @@ const Dump = () => {
   const handlePostSubmit = () => {
     if (newPost.trim() !== '') {
       setPosts([...posts, newPost]);
-      createPost(newPost)
+      let post = {
+        "name": "Robert Scibelli",
+        "date": getDate(),
+        "post": newPost
+      }
+      createPost(post)
       setNewPost('');
     }
   };
@@ -39,12 +44,18 @@ const Dump = () => {
         <h4>Previous Blog Posts</h4>
         {posts.map((post, index) => (
           <div key={index} className="blog-post">
-            <p className="blog-post-content">{post}</p>
+            <p className="blog-post-content">{post.post}</p>
           </div>
         ))}
       </div>
     </div>
   );
 };
+
+const getDate = () => {
+  const timeElapsed = Date.now();
+  const today = new Date(timeElapsed);
+  return today.toLocaleDateString();
+}
 
 export default Dump;

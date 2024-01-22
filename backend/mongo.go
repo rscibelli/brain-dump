@@ -15,7 +15,8 @@ import (
 
 func GetPosts(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("start of GET")
-	ctx, _ := context.WithTimeout(context.Background(), 15*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
+	defer cancel()
 	client, err := makeConnection(ctx)
 	if err != nil {
 		json.NewEncoder(w).Encode("error creating collection: " + err.Error())
@@ -57,7 +58,8 @@ func CreatePost(w http.ResponseWriter, r *http.Request) {
 	var post Post
 	json.Unmarshal(reqBody, &post)
 
-	ctx, _ := context.WithTimeout(context.Background(), 15*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
+	defer cancel()
 
 	client, err := makeConnection(ctx)
 	if err != nil {

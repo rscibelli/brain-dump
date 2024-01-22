@@ -8,3 +8,5 @@ build go project: `env GOOS=linux GOARCH=arm GOARM=7 go build`
 docker compose logs: `docker compose logs -f`
 
 sample data: `{name: "Robert Scibelli", date: "date", post: "hello there"}`
+
+run docker compose: `docker compose up -d`

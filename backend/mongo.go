@@ -77,7 +77,7 @@ func CreatePost(w http.ResponseWriter, r *http.Request) {
 }
 
 func makeConnection(ctx context.Context) (*mongo.Client, error) {
-	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017/brain-dump-db")
+	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017")
 
 	fmt.Println("after client options")
 

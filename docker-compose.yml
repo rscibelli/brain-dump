@@ -21,7 +21,7 @@ services:
     working_dir: /go/src/app
     volumes:
       - ./backend/backend-go:/go/src/app/backend-go
-    command: ./go/src/app/backend-go
+    command: ./backend-go
     ports:
       - "2081:2081"
     depends_on:

@@ -12,6 +12,8 @@ services:
 
   mongo:
     image: webhippie/mongodb:latest-arm32v7
+    environment:
+      - MONGO_DATA_DIR=/data/db
     volumes:
       - /mnt/usb:/data/db
     ports:

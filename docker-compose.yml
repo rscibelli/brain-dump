@@ -20,7 +20,7 @@ services:
     image: golang:1.17
     working_dir: /go/src/app
     volumes:
-      - ./backend/backend-go:/go/src/app
+      - ./backend/backend-go:/go/src/app/backend-go
     command: ./backend-go  # Adjust the command to your main Go file
     ports:
       - "2081:2081"

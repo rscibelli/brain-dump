@@ -16,13 +16,24 @@ services:
     ports:
       - "27017:27017"
 
-  backend:
-    image: node:14
-    working_dir: /app
+  go-app:
+    image: golang:1.17
+    working_dir: /go/src/app
     volumes:
-      - ./backend:/app
+      - ./backend/backend-go:/go/src/app
+    command: ./backend-go  # Adjust the command to your main Go file
     ports:
       - "2081:2081"
-    command: node server.js
     depends_on:
       - mongo
+
+  # backend:
+  #   image: node:14
+  #   working_dir: /app
+  #   volumes:
+  #     - ./backend:/app
+  #   ports:
+  #     - "2081:2081"
+  #   command: node server.js
+  #   depends_on:
+  #     - mongo

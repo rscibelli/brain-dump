@@ -15,10 +15,11 @@ services:
     environment:
       - MONGO_DATA_DIR=/data/db
     volumes:
+      - ./mongo/mongo.conf:/etc/mongo/mongod.conf
       - /mnt/usb:/data/db
     ports:
       - "27017:27017"
-    command: mongod --bind_ip_all
+    command: mongod --config /etc/mongo/mongod.conf
 
   go-app:
     image: golang:1.17

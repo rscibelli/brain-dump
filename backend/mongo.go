@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -14,11 +15,17 @@ import (
 
 func GetPosts(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("start of GET")
-	collection, err := makeCollection()
+	ctx, _ := context.WithTimeout(context.Background(), 15*time.Second)
+	client, err := makeConnection(ctx)
 	if err != nil {
 		json.NewEncoder(w).Encode("error creating collection: " + err.Error())
 		return
 	}
+
+	defer close(client, ctx)
+
+	database := client.Database("brain-dump-db")
+	collection := database.Collection("posts")
 
 	cursor, err := collection.Find(context.TODO(), bson.D{})
 	if err != nil {
@@ -50,11 +57,18 @@ func CreatePost(w http.ResponseWriter, r *http.Request) {
 	var post Post
 	json.Unmarshal(reqBody, &post)
 
-	collection, err := makeCollection()
+	ctx, _ := context.WithTimeout(context.Background(), 15*time.Second)
+
+	client, err := makeConnection(ctx)
 	if err != nil {
 		json.NewEncoder(w).Encode("error creating collection: " + err.Error())
 		return
 	}
+
+	defer close(client, ctx)
+
+	database := client.Database("brain-dump-db")
+	collection := database.Collection("posts")
 
 	_, err = collection.InsertOne(context.TODO(), post)
 	if err != nil {
@@ -62,32 +76,33 @@ func CreatePost(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func makeCollection() (*mongo.Collection, error) {
+func makeConnection(ctx context.Context) (*mongo.Client, error) {
 	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017/brain-dump-db")
 
+	fmt.Println("after client options")
+
 	// Connect to MongoDB
-	client, err := mongo.Connect(context.TODO(), clientOptions)
+	client, err := mongo.Connect(ctx, clientOptions)
 	if err != nil {
 		return nil, err
 	}
 
+	fmt.Println("after client connect")
+
 	// Check the connection
-	err = client.Ping(context.TODO(), nil)
+	err = client.Ping(ctx, nil)
 	if err != nil {
 		return nil, err
 	}
 
 	fmt.Println("Connected to MongoDB!")
 
-	// Close the connection when done
-	defer func() {
-		if err := client.Disconnect(context.TODO()); err != nil {
-			fmt.Println("failed to disconnect")
-		}
-	}()
+	return client, nil
+}
 
-	database := client.Database("brain-dump-db")
-
-	// Access a collection within the database
-	return database.Collection("posts"), nil
+func close(client *mongo.Client, ctx context.Context) {
+	if err := client.Disconnect(context.TODO()); err != nil {
+		fmt.Println("failed to disconnect")
+	}
+	fmt.Println("disconnected from MongoDB!")
 }

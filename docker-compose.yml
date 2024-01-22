@@ -18,6 +18,7 @@ services:
       - /mnt/usb:/data/db
     ports:
       - "27017:27017"
+    command: --bind_ip_all
 
   go-app:
     image: golang:1.17

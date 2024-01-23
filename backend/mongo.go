@@ -79,7 +79,7 @@ func CreatePostMongo(w http.ResponseWriter, r *http.Request) {
 }
 
 func makeConnection(ctx context.Context) (*mongo.Client, error) {
-	clientOptions := options.Client().ApplyURI("mongodb://127.0.0.1:27017/")
+	clientOptions := options.Client().ApplyURI("mongodb://127.0.0.1:27017/local")
 
 	fmt.Println("after client options")
 

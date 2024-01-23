@@ -21,17 +21,17 @@ services:
       - "27017:27017"
     command: mongod --config /etc/mongo/mongod.conf
 
-  mysql:
-    image: mysql:latest
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: brain-dump-db
-      MYSQL_USER: braindump
-      MYSQL_PASSWORD: regpass
-    ports:
-      - "3306:3306"
-    volumes:
-      - /mnt/usb:/var/lib/mysql
+  # mysql:
+  #   image: mysql:latest
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: root
+  #     MYSQL_DATABASE: brain-dump-db
+  #     MYSQL_USER: braindump
+  #     MYSQL_PASSWORD: regpass
+  #   ports:
+  #     - "3306:3306"
+  #   volumes:
+  #     - /mnt/usb:/var/lib/mysql
 
   # go-app:
   #   image: golang:1.17

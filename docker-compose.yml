@@ -10,16 +10,28 @@ services:
       - ./react-app/build:/usr/share/nginx/html
     restart: always
 
-  mongo:
-    image: webhippie/mongodb:latest-arm32v7
+  # mongo:
+  #   image: webhippie/mongodb:latest-arm32v7
+  #   environment:
+  #     - MONGO_DATA_DIR=/data/db
+  #   volumes:
+  #     - ./mongo/mongo.conf:/etc/mongo/mongod.conf
+  #     - /mnt/usb:/data/db
+  #   ports:
+  #     - "27017:27017"
+  #   command: mongod --config /etc/mongo/mongod.conf
+
+  mysql:
+    image: mysql:latest
     environment:
-      - MONGO_DATA_DIR=/data/db
-    volumes:
-      - ./mongo/mongo.conf:/etc/mongo/mongod.conf
-      - /mnt/usb:/data/db
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: brain-dump-db
+      MYSQL_USER: braindump
+      MYSQL_PASSWORD: regpass
     ports:
-      - "27017:27017"
-    command: mongod --config /etc/mongo/mongod.conf
+      - "3306:3306"
+    volumes:
+      - /mnt/usb:/var/lib/mysql
 
   go-app:
     image: golang:1.17

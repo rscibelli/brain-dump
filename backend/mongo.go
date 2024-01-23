@@ -13,7 +13,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func GetPosts(w http.ResponseWriter, r *http.Request) {
+func GetPostsMongo(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("start of GET")
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
@@ -53,7 +53,7 @@ func GetPosts(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(posts)
 }
 
-func CreatePost(w http.ResponseWriter, r *http.Request) {
+func CreatePostMongo(w http.ResponseWriter, r *http.Request) {
 	reqBody, _ := io.ReadAll(r.Body)
 	var post Post
 	json.Unmarshal(reqBody, &post)

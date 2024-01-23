@@ -43,7 +43,7 @@ services:
       - "2081:2081"
     restart: always
     depends_on:
-      - mysql
+      - mongo
 
   # backend:
   #   image: node:14

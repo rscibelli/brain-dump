@@ -33,17 +33,17 @@ services:
   #   volumes:
   #     - /mnt/usb:/var/lib/mysql
 
-  # go-app:
-  #   image: golang:1.17
-  #   working_dir: /go/src/app
-  #   volumes:
-  #     - ./backend/backend-go:/go/src/app/backend-go
-  #   command: ./backend-go
-  #   ports:
-  #     - "2081:2081"
-  #   restart: always
-  #   depends_on:
-  #     - mysql
+  go-app:
+    image: golang:1.17
+    working_dir: /go/src/app
+    volumes:
+      - ./backend/backend-go:/go/src/app/backend-go
+    command: ./backend-go
+    ports:
+      - "2081:2081"
+    restart: always
+    depends_on:
+      - mysql
 
   # backend:
   #   image: node:14

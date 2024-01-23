@@ -12,8 +12,8 @@ import (
 func main() {
 	router := mux.NewRouter().StrictSlash(true)
 
-	router.HandleFunc("/api/post", CreatePost).Methods("POST")
-	router.HandleFunc("/api/posts", GetPosts).Methods("GET")
+	router.HandleFunc("/api/post", CreatePostMongo).Methods("POST")
+	router.HandleFunc("/api/posts", GetPostsMongo).Methods("GET")
 
 	c := cors.New(cors.Options{
 		AllowedOrigins:   []string{"*"},

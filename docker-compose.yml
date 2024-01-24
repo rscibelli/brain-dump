@@ -14,8 +14,10 @@ services:
     image: webhippie/mongodb:latest-arm32v7
     environment:
       - MONGO_DATA_DIR=/data/db
+      - MONGO_INITDB_ROOT_USERNAME=rootuser
+      - MONGO_INITDB_ROOT_PASSWORD=rootpass
     volumes:
-      - ./mongo/resolv.conf:/etc/resolv.conf
+      # - ./mongo/resolv.conf:/etc/resolv.conf
       - /mnt/usb:/data/db
     ports:
       - "27017:27017"
@@ -43,14 +45,3 @@ services:
     restart: always
     depends_on:
       - mongo
-
-  # backend:
-  #   image: node:14
-  #   working_dir: /app
-  #   volumes:
-  #     - ./backend:/app
-  #   ports:
-  #     - "2081:2081"
-  #   command: node server.js
-  #   depends_on:
-  #     - mongo

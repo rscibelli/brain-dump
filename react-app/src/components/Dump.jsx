@@ -7,9 +7,12 @@ const Dump = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    let allposts = getPosts()
-    console.log("posts " + allposts)
-    setPosts(allposts)
+    async function fetchData() {
+      let allposts = await getPosts()
+      console.log("posts " + allposts)
+      setPosts(allposts)
+    }
+    fetchData()
   }, []);
 
   const handleTitleChange = (e) => {
@@ -54,11 +57,13 @@ const Dump = () => {
 
       <div className="previous-posts">
         <h4>Previous Blog Posts</h4>
-        {posts.map((post, index) => (
-          <div key={index} className="blog-post">
-            <p className="blog-post-content">{post.post}</p>
-          </div>
-        ))}
+        {posts.map((post, index) => {
+          return (
+            <div key={index} className="blog-post">
+              <p className="blog-post-content">{post.post}</p>
+            </div>
+          )
+        })}
       </div>
     </div>
   );

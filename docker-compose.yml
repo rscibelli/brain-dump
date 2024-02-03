@@ -14,8 +14,8 @@ services:
     image: webhippie/mongodb:latest-arm32v7
     environment:
       - MONGO_DATA_DIR=/data/db
-      - MONGO_INITDB_ROOT_USERNAME=rootuser
-      - MONGO_INITDB_ROOT_PASSWORD=rootpass
+      # - MONGO_INITDB_ROOT_USERNAME=rootuser
+      # - MONGO_INITDB_ROOT_PASSWORD=rootpass
     volumes:
       - ./mongo/mongo.conf:/etc/mongo/mongod.conf
       - /mnt/usb:/data/db

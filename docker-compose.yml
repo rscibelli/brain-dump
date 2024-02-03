@@ -10,17 +10,29 @@ services:
       - ./react-app/build:/usr/share/nginx/html
     restart: always
 
-  mongo:
-    image: webhippie/mongodb:latest-arm32v7
+  mariadb:
+    image: mariadb
     environment:
-      - MONGO_DATA_DIR=/data/db
-      # - MONGO_INITDB_ROOT_USERNAME=rootuser
-      # - MONGO_INITDB_ROOT_PASSWORD=rootpass
-    volumes:
-      - ./mongo/mongo.conf:/etc/mongo/mongod.conf
-      - /mnt/usb:/data/db
+      MYSQL_ROOT_PASSWORD: mariarootpassword
+      MYSQL_DATABASE: brain-dump-db
+      MYSQL_USER: mariauser
+      MYSQL_PASSWORD: mariapassword
     ports:
-      - "27017:27017"
+      - "3306:3306"
+    volumes:
+      - /mnt/usb/mariadb_data:/var/lib/mysql
+
+  # mongo:
+  #   image: webhippie/mongodb:latest-arm32v7
+  #   environment:
+  #     - MONGO_DATA_DIR=/data/db
+  #     # - MONGO_INITDB_ROOT_USERNAME=rootuser
+  #     # - MONGO_INITDB_ROOT_PASSWORD=rootpass
+  #   volumes:
+  #     - ./mongo/mongo.conf:/etc/mongo/mongod.conf
+  #     - /mnt/usb:/data/db
+  #   ports:
+  #     - "27017:27017"
 
   # mysql:
   #   image: mysql:latest
@@ -44,4 +56,8 @@ services:
       - "2081:2081"
     restart: always
     depends_on:
-      - mongo
+      - mariadb
+
+volumes:
+  mariadb_data:
+    driver: local

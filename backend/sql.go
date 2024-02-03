@@ -26,7 +26,7 @@ func getConnection() (*sql.DB, error) {
 	return db, nil
 }
 
-func CreatePost(w http.ResponseWriter, r *http.Request) {
+func CreatePostSQL(w http.ResponseWriter, r *http.Request) {
 	reqBody, _ := io.ReadAll(r.Body)
 	var post Post
 	json.Unmarshal(reqBody, &post)
@@ -55,7 +55,7 @@ func CreatePost(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Row inserted successfully.")
 }
 
-func GetPosts(w http.ResponseWriter, r *http.Request) {
+func GetPostsSQL(w http.ResponseWriter, r *http.Request) {
 	db, err := getConnection()
 	if err != nil {
 		json.NewEncoder(w).Encode("error creating connection: " + err.Error())

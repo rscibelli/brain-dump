@@ -10,18 +10,6 @@ services:
       - ./react-app/build:/usr/share/nginx/html
     restart: always
 
-  mariadb:
-    image: mariadb
-    environment:
-      MYSQL_ROOT_PASSWORD: mariarootpassword
-      MYSQL_DATABASE: brain-dump-db
-      MYSQL_USER: mariauser
-      MYSQL_PASSWORD: mariapassword
-    ports:
-      - "3306:3306"
-    volumes:
-      - /mnt/usb/mariadb_data:/var/lib/mysql
-
   # mongo:
   #   image: webhippie/mongodb:latest-arm32v7
   #   environment:
@@ -34,30 +22,17 @@ services:
   #   ports:
   #     - "27017:27017"
 
-  # mysql:
-  #   image: mysql:latest
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: root
-  #     MYSQL_DATABASE: brain-dump-db
-  #     MYSQL_USER: braindump
-  #     MYSQL_PASSWORD: regpass
-  #   ports:
-  #     - "3306:3306"
-  #   volumes:
-  #     - /mnt/usb:/var/lib/mysql
-
   go-app:
     image: golang:1.17
     working_dir: /go/src/app
     volumes:
       - ./backend/backend-go:/go/src/app/backend-go
+      - brain-dump-files:/go/src/app/brain-dump-files
     command: ./backend-go
     ports:
       - "2081:2081"
     restart: always
-    depends_on:
-      - mariadb
 
 volumes:
-  mariadb_data:
+  brain-dump-files:
     driver: local

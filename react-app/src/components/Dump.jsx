@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getPosts, createPost } from '../functions/dbCalls';
 
 const Dump = () => {
+  const [title, setTitle] = useState('');
   const [newPost, setNewPost] = useState('');
   const [posts, setPosts] = useState([]);
 
@@ -10,6 +11,10 @@ const Dump = () => {
     console.log("posts " + allposts)
     setPosts(allposts)
   }, []);
+
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value)
+  }
 
   const handlePostChange = (e) => {
     setNewPost(e.target.value);
@@ -21,20 +26,27 @@ const Dump = () => {
       let post = {
         "name": "Robert Scibelli",
         "date": getDate(),
+        "title": title,
         "post": newPost
       }
       createPost(post)
       setNewPost('');
+      setTitle('');
     }
   };
 
   return (
     <div className="blog p-2 mt-2">
       <div className='mx-5'>
-        <h3 className='text-start'>What's on your mind?</h3>
-        <textarea className="form-control bg-light" rows="3" onChange={handlePostChange}></textarea>
+        <h3 className='text-start'>Create a Post</h3>
+        <div>
+          <textarea id="postTitle" className="form-control bg-light" placeholder="Title" rows="1" onChange={handleTitleChange}></textarea>
+        </div>
+        <div>
+          <textarea id="postContent" className="form-control bg-light" placeholder="Content" rows="3" onChange={handlePostChange}></textarea>
+        </div>
         <div className='text-end'>
-            <button className="btn btn-primary mt-1" onClick={handlePostSubmit}>Submit</button>
+          <button className="btn btn-primary mt-1" onClick={handlePostSubmit}>Submit</button>
         </div>
       </div>
 

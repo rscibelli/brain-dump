@@ -27,5 +27,3 @@ func main() {
 		log.Fatal(err)
 	}
 }
-
-// env GOOS=linux GOARCH=arm GOARM=7 go build

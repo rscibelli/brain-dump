@@ -25,7 +25,7 @@ func GetPostsMongo(w http.ResponseWriter, r *http.Request) {
 
 	defer close(client, ctx)
 
-	database := client.Database("brain-dump-db")
+	database := client.Database("local")
 	collection := database.Collection("posts")
 
 	cursor, err := collection.Find(context.TODO(), bson.D{})
@@ -69,7 +69,7 @@ func CreatePostMongo(w http.ResponseWriter, r *http.Request) {
 
 	defer close(client, ctx)
 
-	database := client.Database("brain-dump-db")
+	database := client.Database("local")
 	collection := database.Collection("posts")
 
 	_, err = collection.InsertOne(context.TODO(), post)
@@ -79,7 +79,7 @@ func CreatePostMongo(w http.ResponseWriter, r *http.Request) {
 }
 
 func makeConnection(ctx context.Context) (*mongo.Client, error) {
-	clientOptions := options.Client().ApplyURI("mongodb://rootuser:rootpass@localhost:27017/local")
+	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017/")
 
 	fmt.Println("after client options")
 

@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { getPosts, createPost } from '../functions/dbCalls';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Card from './Card';
+
 
 const Dump = () => {
   const [title, setTitle] = useState('');
@@ -25,14 +28,14 @@ const Dump = () => {
 
   const handlePostSubmit = () => {
     if (newPost.trim() !== '') {
-      setPosts([...posts, newPost]);
-      let post = {
+      let newCompletePost = {
         "name": "Robert Scibelli",
         "date": getDate(),
         "title": title,
         "post": newPost
       }
-      createPost(post)
+      setPosts([...posts, newCompletePost]);
+      createPost(newCompletePost)
       setNewPost('');
       setTitle('');
     }
@@ -55,15 +58,15 @@ const Dump = () => {
 
       <hr className='w-75 mx-auto' />
 
-      <div className="previous-posts">
-        <h4>Previous Blog Posts</h4>
-        {posts.map((post, index) => {
-          return (
-            <div key={index} className="blog-post">
-              <p className="blog-post-content">{post.post}</p>
+      <div className="px-5 mx-5">
+        <h4 className="mb-4">Previous Blog Posts</h4>
+        <div className="row row-cols-1 row-cols-md-2">
+          {posts.map((post, index) => (
+            <div key={index} className="col mb-3">
+              <Card post={post} />
             </div>
-          )
-        })}
+          ))}
+        </div>
       </div>
     </div>
   );

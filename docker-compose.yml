@@ -16,7 +16,7 @@ services:
     ports:
       - "2080:3000"
     volumes:
-      - ./react-app/build:/app
+      - ./react-app/build:/app/build
     restart: always
 
   # mongo:

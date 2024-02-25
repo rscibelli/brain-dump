@@ -12,7 +12,7 @@ services:
 
   react-app:
     image: node:latest
-    command: npx serve -s build
+    command: cd /app && npx serve -s build
     ports:
       - "2080:3000"
     volumes:

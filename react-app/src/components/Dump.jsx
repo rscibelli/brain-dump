@@ -59,7 +59,7 @@ const Dump = () => {
       <hr className='w-75 mx-auto' />
 
       <div className="px-5 mx-5">
-        <h4 className="mb-4">Previous Blog Posts</h4>
+        <h4 className="mb-4">Previous Posts</h4>
         <div className="row row-cols-1 row-cols-md-2">
           {posts.map((post, index) => (
             <div key={index} className="col mb-3">

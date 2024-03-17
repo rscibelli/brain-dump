@@ -44,7 +44,7 @@ const Dump = () => {
   return (
     <div className="blog p-2 mt-2">
       <div className='mx-5'>
-        <h3 className='text-start'>Create a Post</h3>
+        <h3 className='text-start'>Create a Dump</h3>
         <div>
           <textarea id="postTitle" className="form-control bg-light" placeholder="Title" rows="1" onChange={handleTitleChange}></textarea>
         </div>
@@ -59,8 +59,8 @@ const Dump = () => {
       <hr className='w-75 mx-auto' />
 
       <div className="px-5 mx-5">
-        <h4 className="mb-4">Previous Posts</h4>
-        <div className="row row-cols-1 row-cols-md-2">
+        <h4 className="mb-4">Previous Dumps</h4>
+        <div className="row row-cols-1">
           {posts.map((post, index) => (
             <div key={index} className="col mb-3">
               <Card post={post} />

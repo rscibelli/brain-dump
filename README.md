@@ -13,6 +13,7 @@ build go project: `env GOOS=linux GOARCH=arm GOARM=7 go build`
 
 docker compose logs: `docker compose logs -f`
 run docker compose: `docker compose up -d`
+force recreate: `docker compose up -d --force-recreate`
 
 ## Mongo shell commands
 

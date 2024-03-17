@@ -61,7 +61,7 @@ const Dump = () => {
       <div className="px-5 mx-5">
         <h4 className="mb-4">Previous Dumps</h4>
         <div className="row row-cols-1">
-          {posts.map((post, index) => (
+          {posts.slice().reverse().map((post, index) => (
             <div key={index} className="col mb-3">
               <Card post={post} />
             </div>

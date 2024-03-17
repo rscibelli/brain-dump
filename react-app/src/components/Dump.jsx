@@ -46,10 +46,10 @@ const Dump = () => {
       <div className='mx-5'>
         <h3 className='text-start'>Create a Dump</h3>
         <div>
-          <textarea id="postTitle" className="form-control bg-light" placeholder="Title" rows="1" onChange={handleTitleChange}></textarea>
+          <textarea id="postTitle" className="form-control bg-light" placeholder="Title" rows="1" onChange={handleTitleChange} value={title}></textarea>
         </div>
         <div>
-          <textarea id="postContent" className="form-control bg-light" placeholder="Content" rows="3" onChange={handlePostChange}></textarea>
+          <textarea id="postContent" className="form-control bg-light" placeholder="Content" rows="3" onChange={handlePostChange} value={newPost}></textarea>
         </div>
         <div className='text-end'>
           <button className="btn btn-primary mt-1" onClick={handlePostSubmit}>Submit</button>
